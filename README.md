@@ -1,0 +1,47 @@
+# Layer AI Examples
+
+A collection of example applications showcasing how to use [Layer AI](https://github.com/micah-nettey/layer-ai) for AI-powered features.
+
+## Examples
+
+### [Content Generator](./content-generator)
+AI-powered content generation for blogs, social media, and product descriptions. Demonstrates Layer AI's routing, fallback strategies, and cost tracking.
+
+**Stack:** Next.js, TypeScript, Tailwind CSS
+**Live Demo:** [Coming soon]
+
+---
+
+## Getting Started
+
+Each example is a standalone project. Navigate to the example directory and follow its README for setup instructions.
+
+```bash
+# Clone this repository
+git clone https://github.com/micah-nettey/layer-ai-examples.git
+
+# Navigate to an example
+cd layer-ai-examples/content-generator
+
+# Follow the example's README
+```
+
+## Prerequisites
+
+- Node.js 18+ and pnpm
+- A Layer AI account ([Sign up](https://uselayer.ai))
+- Layer AI API key
+
+## Learn More
+
+- [Layer AI Documentation](https://github.com/micah-nettey/layer-ai)
+- [Layer AI SDK](https://www.npmjs.com/package/@layer-ai/sdk)
+- [Layer AI CLI](https://www.npmjs.com/package/@layer-ai/cli)
+
+## Contributing
+
+Found a bug or want to add an example? Contributions are welcome! Please open an issue or PR.
+
+## License
+
+MIT
