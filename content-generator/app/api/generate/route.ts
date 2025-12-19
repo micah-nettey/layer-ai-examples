@@ -17,14 +17,17 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    const result = await layer.complete({
+    const result = await layer.completeV2({
       gate,
-      messages: [
-        { role: 'user', content: prompt }
-      ],
+      type: 'chat',
+      data: {
+        messages: [
+          { role: 'user', content: prompt }
+        ],
+      },
     });
 
-    return NextResponse.json(result);
+    return NextResponse.json({ content: result.content });
   } catch (error: any) {
     console.error('Generation error:', error);
     console.error('Error details:', {
