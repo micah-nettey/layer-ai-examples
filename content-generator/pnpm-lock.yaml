@@ -9,8 +9,8 @@ importers:
   .:
     dependencies:
       '@layer-ai/sdk':
-        specifier: ^0.1.4
-        version: 0.1.4
+        specifier: ^0.5.1
+        version: 0.5.1
       next:
         specifier: 16.0.10
         version: 16.0.10(@babel/core@7.28.5)(react-dom@19.2.1(react@19.2.1))(react@19.2.1)
@@ -335,8 +335,8 @@ packages:
   '@jridgewell/trace-mapping@0.3.31':
     resolution: {integrity: sha512-zzNR+SdQSDJzc8joaeP8QQoCQr8NuYx2dIIytl1QeBEZHJ9uW6hebsrYgbz8hJwUQao3TWCMtmfV8Nu1twOLAw==}
 
-  '@layer-ai/sdk@0.1.4':
-    resolution: {integrity: sha512-rrnDNCkJxxZ++NMxyhU2aBax/bcM517plpCn1nVWYMogwjb4JJUXG+1lGB0rrm3t/K5h0T4goDv5nftnGbJn4A==}
+  '@layer-ai/sdk@0.5.1':
+    resolution: {integrity: sha512-nx3uoTuK0SExj5oAg57bSWbZNDnFGekYLQv86IUgzsokFP2sgrLvntVJKV0zK5eCfe31u48fCc70aKyyZbhQjQ==}
 
   '@napi-rs/wasm-runtime@0.2.12':
     resolution: {integrity: sha512-ZVWUcfwY4E/yPitQJl481FjFo3K22D6qF0DuFH6Y/nbnE11GY5uguDxZMGXPQ8WQ0128MXQD7TnfHyK4oWoIJQ==}
@@ -2211,7 +2211,7 @@ snapshots:
       '@jridgewell/resolve-uri': 3.1.2
       '@jridgewell/sourcemap-codec': 1.5.5
 
-  '@layer-ai/sdk@0.1.4':
+  '@layer-ai/sdk@0.5.1':
     dependencies:
       yaml: 2.8.2
       zod: 3.25.76

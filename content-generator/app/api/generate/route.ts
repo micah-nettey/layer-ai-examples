@@ -17,7 +17,7 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    const result = await layer.completeV2({
+    const result = await layer.complete({
       gate,
       type: 'chat',
       data: {
