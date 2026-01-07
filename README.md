@@ -4,6 +4,13 @@ A collection of example applications showcasing how to use [Layer AI](https://gi
 
 ## Examples
 
+### [AI Chatbot](./chatbot)
+Modern conversational AI chatbot with message history, real-time cost tracking, and performance metrics. Showcases Layer AI's smart routing, model normalization, and automatic fallback handling.
+
+**Stack:** Next.js, TypeScript, Tailwind CSS
+**Features:** Gate-based routing, cost tracking, latency monitoring, dark mode
+**Live Demo:** [Coming soon]
+
 ### [Content Generator](./content-generator)
 AI-powered content generation for blogs, social media, and product descriptions. Demonstrates Layer AI's routing, fallback strategies, and cost tracking.
 
