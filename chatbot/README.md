@@ -24,6 +24,7 @@ This chatbot demonstrates Layer AI's core capabilities:
 3. **Cost Tracking**: See the exact cost of each AI response
 4. **Model Normalization**: Unified API across different AI providers (OpenAI, Anthropic, Google, etc.)
 5. **Performance Monitoring**: Track latency for every request
+6. **Usage Tracking**: All requests are automatically tracked in your Layer AI dashboard
 
 ## Prerequisites
 
@@ -195,6 +196,7 @@ Consider adding:
 - Conversation export/import
 - User authentication
 - Conversation history persistence
+- Usage monitoring via Layer AI dashboard
 
 ## Deployment
 
