@@ -6,7 +6,7 @@ type ContentType = 'blog-outline' | 'social-caption' | 'product-description';
 
 interface ContentOption {
   id: ContentType;
-  gate: string;
+  gateId: string;
   title: string;
   description: string;
   placeholder: string;
@@ -15,21 +15,21 @@ interface ContentOption {
 const contentOptions: ContentOption[] = [
   {
     id: 'blog-outline',
-    gate: 'blog-outline',
+    gateId: 'blog-outline', // TODO: Replace with actual gate UUID
     title: 'Blog Outline',
     description: 'Generate structured outlines for blog posts',
     placeholder: 'Enter your blog topic (e.g., "The future of AI in healthcare")',
   },
   {
     id: 'social-caption',
-    gate: 'social-caption',
+    gateId: 'social-caption', // TODO: Replace with actual gate UUID
     title: 'Social Media Caption',
     description: 'Create engaging social media captions',
     placeholder: 'Describe the post content (e.g., "New product launch announcement")',
   },
   {
     id: 'product-description',
-    gate: 'product-description',
+    gateId: 'product-description', // TODO: Replace with actual gate UUID
     title: 'Product Description',
     description: 'Write compelling product descriptions',
     placeholder: 'Describe your product (e.g., "Wireless noise-cancelling headphones")',
@@ -62,7 +62,7 @@ export default function Home() {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          gate: selectedOption.gate,
+          gateId: selectedOption.gateId,
           prompt: prompt.trim(),
         }),
       });

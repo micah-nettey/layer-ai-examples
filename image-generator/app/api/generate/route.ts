@@ -18,8 +18,8 @@ export async function POST(req: NextRequest) {
     const startTime = Date.now();
 
     const result = await layer.complete({
-      gateId: 'f6cc6bd9-4ec1-4ac2-8912-81a085255c35',
-      type: 'chat',
+      gateId: 'e7f12750-c6dc-4138-a221-5ca071aaa6f0',
+      type: 'image',
       data: {
         messages,
       },

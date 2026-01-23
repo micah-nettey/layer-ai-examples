@@ -2,23 +2,23 @@ import { NextRequest, NextResponse } from 'next/server';
 import { layer } from '@/lib/layer';
 
 export async function POST(req: NextRequest) {
-  let gate: string | undefined;
+  let gateId: string | undefined;
   let prompt: string | undefined;
 
   try {
     const body = await req.json();
-    gate = body.gate;
+    gateId = body.gateId;
     prompt = body.prompt;
 
-    if (!gate || !prompt) {
+    if (!gateId || !prompt) {
       return NextResponse.json(
-        { error: 'Gate and prompt are required' },
+        { error: 'Gate ID and prompt are required' },
         { status: 400 }
       );
     }
 
     const result = await layer.complete({
-      gate,
+      gateId,
       type: 'chat',
       data: {
         messages: [
@@ -33,7 +33,7 @@ export async function POST(req: NextRequest) {
     console.error('Error details:', {
       message: error.message,
       stack: error.stack,
-      gate,
+      gateId,
       prompt: prompt?.substring(0, 100),
     });
     return NextResponse.json(
