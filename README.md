@@ -37,7 +37,7 @@ cd layer-ai-examples/content-generator
 
 - Node.js 18+ and pnpm
 - A Layer AI account ([Sign up](https://uselayer.ai))
-- Layer AI API key
+- Layer AI API key from your [dashboard](https://uselayer.ai/dashboard)
 
 ## Learn More
 

@@ -9,6 +9,7 @@ An AI-powered content generation demo built with [Layer AI](https://github.com/m
 - **Product Descriptions** - Write compelling e-commerce product descriptions
 - **Cost Tracking** - See the cost and model used for each generation
 - **Smart Routing** - Automatic model selection with fallback strategies
+- **Usage Tracking** - All requests tracked automatically in your Layer AI dashboard
 
 ## Tech Stack
 
@@ -68,6 +69,7 @@ This example demonstrates Layer AI's key features:
 2. **Fallback strategies** - If primary model fails, automatically tries backup models
 3. **Cost tracking** - Every request logs cost, latency, and tokens used
 4. **Metadata display** - See which model was actually used for each request
+5. **Usage tracking** - All requests are automatically tracked in your Layer AI dashboard
 
 ## Project Structure
 
