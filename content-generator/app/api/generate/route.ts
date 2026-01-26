@@ -19,7 +19,6 @@ export async function POST(req: NextRequest) {
 
     const result = await layer.complete({
       gateId,
-      type: 'chat',
       data: {
         messages: [
           { role: 'user', content: prompt }

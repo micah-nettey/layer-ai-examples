@@ -106,13 +106,15 @@ The user types a message in the chat interface.
 ```typescript
 // app/api/chat/route.ts
 const result = await layer.complete({
-  gate: 'layer-ai-chatbot',
-  type: 'chat',
+  gateName: 'layer-ai-chatbot',
+  gateId: 'f6cc6bd9-4ec1-4ac2-8912-81a085255c35',
   data: {
     messages,
   },
 });
 ```
+
+> **Note**: The `type` field is no longer required! Layer AI automatically infers the task type from your gate's configuration. The gate's `taskType` determines how the request is processed.
 
 ### 3. Layer AI Handles Routing
 
@@ -140,8 +142,8 @@ Handles chat requests using the Layer AI SDK:
 import { layer } from '@/lib/layer';
 
 const result = await layer.complete({
-  gate: 'layer-ai-chatbot',
-  type: 'chat',
+  gateName: 'layer-ai-chatbot',
+  gateId: 'f6cc6bd9-4ec1-4ac2-8912-81a085255c35',
   data: { messages },
 });
 
@@ -178,8 +180,8 @@ Update the gate name in `app/api/chat/route.ts`:
 
 ```typescript
 const result = await layer.complete({
-  gate: 'your-custom-gate-name', // Change this
-  type: 'chat',
+  gateName: 'your-custom-gate-name', // Change this
+  gateId: 'your-gate-id',
   data: { messages },
 });
 ```

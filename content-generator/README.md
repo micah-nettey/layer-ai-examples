@@ -7,6 +7,7 @@ An AI-powered content generation demo built with [Layer AI](https://github.com/m
 - **Blog Post Outlines** - Generate structured blog post outlines from topics
 - **Social Media Captions** - Create engaging social media content
 - **Product Descriptions** - Write compelling e-commerce product descriptions
+- **Automatic Type Inference** - No need to specify task type, Layer AI uses your gate's configuration
 - **Cost Tracking** - See the cost and model used for each generation
 - **Smart Routing** - Automatic model selection with fallback strategies
 - **Usage Tracking** - All requests tracked automatically in your Layer AI dashboard
@@ -66,10 +67,30 @@ pnpm dev
 This example demonstrates Layer AI's key features:
 
 1. **Gate-based routing** - Each content type uses a different gate with optimized models
-2. **Fallback strategies** - If primary model fails, automatically tries backup models
-3. **Cost tracking** - Every request logs cost, latency, and tokens used
-4. **Metadata display** - See which model was actually used for each request
-5. **Usage tracking** - All requests are automatically tracked in your Layer AI dashboard
+2. **Automatic type inference** - Task type is automatically inferred from the gate's `taskType` configuration
+3. **Fallback strategies** - If primary model fails, automatically tries backup models
+4. **Cost tracking** - Every request logs cost, latency, and tokens used
+5. **Metadata display** - See which model was actually used for each request
+6. **Usage tracking** - All requests are automatically tracked in your Layer AI dashboard
+
+### Simplified API
+
+With the latest SDK (v2.1.1+), you no longer need to specify the `type` field in your requests:
+
+```typescript
+// Old way (still works, but not recommended)
+const result = await layer.complete({
+  gateId: 'your-gate-id',
+  type: 'chat',
+  data: { messages },
+});
+
+// New way (recommended) - type is inferred from gate's taskType
+const result = await layer.complete({
+  gateId: 'your-gate-id',
+  data: { messages },
+});
+```
 
 ## Project Structure
 
