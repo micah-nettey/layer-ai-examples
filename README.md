@@ -5,16 +5,23 @@ A collection of example applications showcasing how to use [Layer AI](https://gi
 ## Examples
 
 ### [AI Chatbot](./chatbot)
-Modern conversational AI chatbot with message history, real-time cost tracking, and performance metrics. Showcases Layer AI's smart routing, model normalization, and automatic fallback handling.
+Modern conversational AI chatbot with message history, real-time cost tracking, and performance metrics. Showcases Layer AI's smart routing, model normalization, automatic fallback handling, and simplified API with automatic task type inference.
 
 **Stack:** Next.js, TypeScript, Tailwind CSS
-**Features:** Gate-based routing, cost tracking, latency monitoring, dark mode
+**Features:** Gate-based routing, automatic type inference, cost tracking, latency monitoring, dark mode
 **Live Demo:** [Coming soon]
 
 ### [Content Generator](./content-generator)
-AI-powered content generation for blogs, social media, and product descriptions. Demonstrates Layer AI's routing, fallback strategies, and cost tracking.
+AI-powered content generation for blogs, social media, and product descriptions. Demonstrates Layer AI's routing, fallback strategies, cost tracking, and simplified request API.
 
 **Stack:** Next.js, TypeScript, Tailwind CSS
+**Live Demo:** [Coming soon]
+
+### [Image Generator](./image-generator)
+AI-powered image generation with DALL-E and other models. Shows how Layer AI automatically infers task type from gate configuration, eliminating the need to specify type in requests.
+
+**Stack:** Next.js, TypeScript, Tailwind CSS
+**Features:** Automatic type inference, multi-modal support, cost tracking
 **Live Demo:** [Coming soon]
 
 ---

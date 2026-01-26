@@ -20,7 +20,6 @@ export async function POST(req: NextRequest) {
     const result = await layer.complete({
       gateName: 'layer-ai-chatbot',
       gateId: 'f6cc6bd9-4ec1-4ac2-8912-81a085255c35',
-      type: 'chat',
       data: {
         messages,
       },
