@@ -17,9 +17,9 @@ An AI-powered image generation demo built with [Layer AI](https://github.com/mic
 
 ## What This Demo Showcases
 
-This example demonstrates Layer AI's **simplified API with automatic type inference**:
+This example demonstrates Layer AI's **type-safe methods with compile-time validation**:
 
-### Old Way (SDK < 2.1.1)
+### Old Way (SDK < 2.5.0)
 ```typescript
 const result = await layer.complete({
   gateId: 'your-gate-id',
@@ -30,11 +30,10 @@ const result = await layer.complete({
 });
 ```
 
-### New Way (SDK >= 2.1.1)
+### New Way (SDK >= 2.5.0)
 ```typescript
-const result = await layer.complete({
+const result = await layer.image({
   gateId: 'your-gate-id',
-  // ✅ type is automatically inferred from gate's taskType
   data: {
     prompt: 'A sunset over mountains',
   },
@@ -42,10 +41,10 @@ const result = await layer.complete({
 ```
 
 **Benefits:**
-- Less boilerplate code
-- Fewer potential bugs (no type mismatches)
+- Type-safe requests with compile-time validation
+- IDE autocomplete for all parameters
 - Cleaner, more intuitive API
-- Gate configuration is the single source of truth for task type
+- Catches errors before runtime
 
 ## Prerequisites
 
@@ -126,7 +125,7 @@ The user types an image description in the text area.
 
 ```typescript
 // app/api/generate/route.ts
-const result = await layer.complete({
+const result = await layer.image({
   gateId: process.env.LAYER_GATE_ID,
   data: {
     prompt: userPrompt,
@@ -134,9 +133,10 @@ const result = await layer.complete({
 });
 ```
 
-Notice there's **no `type: 'image'`** field! Layer AI automatically knows this is an image generation request because:
-- The gate's `taskType` is set to `image`
-- Layer AI defaults to the gate's task type for all requests
+Notice we're using the **type-safe `layer.image()`** method! This provides:
+- Compile-time type checking for image-specific parameters
+- IDE autocomplete for all valid options
+- Better error messages if you pass invalid data
 
 ### 3. Layer AI Handles Everything
 
@@ -164,7 +164,7 @@ Handles image generation using the Layer AI SDK:
 ```typescript
 import { layer } from '@/lib/layer';
 
-const result = await layer.complete({
+const result = await layer.image({
   gateId: process.env.LAYER_GATE_ID,
   data: {
     prompt: userPrompt,
@@ -210,7 +210,7 @@ LAYER_GATE_ID=your-custom-gate-id
 Or pass it directly in the code:
 
 ```typescript
-const result = await layer.complete({
+const result = await layer.image({
   gateId: 'your-custom-gate-id',
   data: { prompt },
 });
@@ -221,7 +221,7 @@ const result = await layer.complete({
 Add custom parameters to the request:
 
 ```typescript
-const result = await layer.complete({
+const result = await layer.image({
   gateId: process.env.LAYER_GATE_ID,
   data: {
     prompt: userPrompt,
