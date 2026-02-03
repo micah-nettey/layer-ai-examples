@@ -24,8 +24,9 @@ export async function POST(req: NextRequest) {
 
     const latency = Date.now() - startTime;
 
-    // Extract image URL from the images array
-    const imageUrl = result.images?.[0]?.url;
+    // Extract image URL or base64 from the images array
+    const firstImage = result.images?.[0];
+    const imageUrl = firstImage?.url || (firstImage?.base64 ? `data:image/png;base64,${firstImage.base64}` : undefined);
 
     return NextResponse.json({
       content: imageUrl,
