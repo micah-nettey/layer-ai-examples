@@ -15,9 +15,8 @@ export async function POST(req: NextRequest) {
 
     const startTime = Date.now();
 
-    const result = await layer.complete({
+    const result = await layer.image({
       gateId: 'e7f12750-c6dc-4138-a221-5ca071aaa6f0',
-      type: 'image',
       data: {
         prompt: prompt,
       },
@@ -25,8 +24,9 @@ export async function POST(req: NextRequest) {
 
     const latency = Date.now() - startTime;
 
-    // Extract image URL from the images array
-    const imageUrl = result.images?.[0]?.url;
+    // Extract image URL or base64 from the images array
+    const firstImage = result.images?.[0];
+    const imageUrl = firstImage?.url || (firstImage?.base64 ? `data:image/png;base64,${firstImage.base64}` : undefined);
 
     return NextResponse.json({
       content: imageUrl,

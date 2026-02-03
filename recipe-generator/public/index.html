@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recipe Generator - Layer AI Demo</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #a8b8ff 0%, #c4b5fd 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 40px;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .card {
+            background: white;
+            border-radius: 16px;
+            padding: 30px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+        }
+
+        .input-section {
+            margin-bottom: 20px;
+        }
+
+        .input-section label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .ingredient-input-wrapper {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        .ingredient-input-wrapper input {
+            flex: 1;
+            padding: 12px;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        .ingredient-input-wrapper input:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .ingredient-input-wrapper button {
+            padding: 12px 20px;
+            background: #48bb78;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .ingredient-input-wrapper button:hover {
+            background: #38a169;
+        }
+
+        .ingredients-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 20px;
+            min-height: 40px;
+        }
+
+        .ingredient-tag {
+            background: #edf2f7;
+            padding: 8px 12px;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.9rem;
+        }
+
+        .ingredient-tag button {
+            background: none;
+            border: none;
+            color: #e53e3e;
+            font-weight: bold;
+            cursor: pointer;
+            font-size: 1rem;
+            padding: 0;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .generate-btn {
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .generate-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .generate-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .loading {
+            display: none;
+            text-align: center;
+            padding: 40px;
+            color: #667eea;
+        }
+
+        .loading-spinner {
+            width: 50px;
+            height: 50px;
+            border: 4px solid #e2e8f0;
+            border-top-color: #667eea;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .recipe-result {
+            display: none;
+        }
+
+        .recipe-result.active {
+            display: block;
+        }
+
+        .recipe-content {
+            line-height: 1.8;
+            color: #2d3748;
+        }
+
+        .recipe-content h1, .recipe-content h2, .recipe-content h3 {
+            color: #1a202c;
+            margin-top: 20px;
+            margin-bottom: 10px;
+        }
+
+        .recipe-content ul, .recipe-content ol {
+            margin-left: 20px;
+            margin-bottom: 15px;
+        }
+
+        .metadata {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 2px solid #e2e8f0;
+        }
+
+        .metadata-item {
+            text-align: center;
+        }
+
+        .metadata-label {
+            font-size: 0.85rem;
+            color: #718096;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 5px;
+        }
+
+        .metadata-value {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #667eea;
+        }
+
+        .error {
+            background: #fed7d7;
+            color: #9b2c2c;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 20px;
+            display: none;
+        }
+
+        .error.active {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🍳 Recipe Generator</h1>
+            <p>Powered by Layer AI - Switch AI models without code changes</p>
+        </div>
+
+        <div class="card">
+            <div class="input-section">
+                <label>Add Ingredients</label>
+                <div class="ingredient-input-wrapper">
+                    <input
+                        type="text"
+                        id="ingredientInput"
+                        placeholder="Enter an ingredient (e.g., chicken breast)"
+                        onkeypress="handleKeyPress(event)"
+                    >
+                    <button onclick="addIngredient()">Add</button>
+                </div>
+                <div class="ingredients-list" id="ingredientsList"></div>
+            </div>
+
+            <button class="generate-btn" onclick="generateRecipe()" id="generateBtn">
+                Generate Recipe
+            </button>
+
+            <div class="error" id="errorMessage"></div>
+        </div>
+
+        <div class="loading" id="loading">
+            <div class="loading-spinner"></div>
+            <p>Generating your recipe...</p>
+        </div>
+
+        <div class="card recipe-result" id="recipeResult">
+            <div class="recipe-content" id="recipeContent"></div>
+            <div class="metadata" id="metadata"></div>
+        </div>
+    </div>
+
+    <script>
+        let ingredients = [];
+
+        function addIngredient() {
+            const input = document.getElementById('ingredientInput');
+            const ingredient = input.value.trim();
+
+            if (ingredient && !ingredients.includes(ingredient)) {
+                ingredients.push(ingredient);
+                updateIngredientsList();
+                input.value = '';
+            }
+        }
+
+        function removeIngredient(ingredient) {
+            ingredients = ingredients.filter(i => i !== ingredient);
+            updateIngredientsList();
+        }
+
+        function updateIngredientsList() {
+            const list = document.getElementById('ingredientsList');
+            list.innerHTML = ingredients.map(ingredient => `
+                <div class="ingredient-tag">
+                    <span>${ingredient}</span>
+                    <button onclick="removeIngredient('${ingredient}')">×</button>
+                </div>
+            `).join('');
+        }
+
+        function handleKeyPress(event) {
+            if (event.key === 'Enter') {
+                addIngredient();
+            }
+        }
+
+        async function generateRecipe() {
+            if (ingredients.length === 0) {
+                showError('Please add at least one ingredient');
+                return;
+            }
+
+            hideError();
+            document.getElementById('loading').style.display = 'block';
+            document.getElementById('recipeResult').classList.remove('active');
+            document.getElementById('generateBtn').disabled = true;
+
+            try {
+                const response = await fetch('http://localhost:3007/recipe', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        groceryList: ingredients
+                    })
+                });
+
+                const data = await response.json();
+
+                if (!response.ok) {
+                    throw new Error(data.message || 'Failed to generate recipe');
+                }
+
+                displayRecipe(data);
+            } catch (error) {
+                showError(error.message);
+            } finally {
+                document.getElementById('loading').style.display = 'none';
+                document.getElementById('generateBtn').disabled = false;
+            }
+        }
+
+        function displayRecipe(data) {
+            const recipeContent = document.getElementById('recipeContent');
+            const metadata = document.getElementById('metadata');
+
+            // Convert markdown-style recipe to HTML
+            const recipeHtml = data.recipe
+                .replace(/^# (.*$)/gim, '<h1>$1</h1>')
+                .replace(/^## (.*$)/gim, '<h2>$1</h2>')
+                .replace(/^### (.*$)/gim, '<h3>$1</h3>')
+                .replace(/^\* (.*$)/gim, '<li>$1</li>')
+                .replace(/^- (.*$)/gim, '<li>$1</li>')
+                .replace(/^\d+\. (.*$)/gim, '<li>$1</li>')
+                .replace(/\n\n/g, '</p><p>')
+                .replace(/<li>/g, '<ul><li>')
+                .replace(/<\/li>\n(?!<li>)/g, '</li></ul>');
+
+            recipeContent.innerHTML = `<p>${recipeHtml}</p>`;
+
+            // Display metadata
+            metadata.innerHTML = `
+                <div class="metadata-item">
+                    <div class="metadata-label">Model</div>
+                    <div class="metadata-value">${data.metadata.model}</div>
+                </div>
+                <div class="metadata-item">
+                    <div class="metadata-label">Cost</div>
+                    <div class="metadata-value">$${data.metadata.cost.toFixed(4)}</div>
+                </div>
+                <div class="metadata-item">
+                    <div class="metadata-label">Latency</div>
+                    <div class="metadata-value">${data.metadata.latency}</div>
+                </div>
+            `;
+
+            document.getElementById('recipeResult').classList.add('active');
+        }
+
+        function showError(message) {
+            const errorEl = document.getElementById('errorMessage');
+            errorEl.textContent = message;
+            errorEl.classList.add('active');
+        }
+
+        function hideError() {
+            document.getElementById('errorMessage').classList.remove('active');
+        }
+
+        // Add some example ingredients on load
+        window.onload = function() {
+            ingredients = ['chicken breast', 'spinach', 'garlic'];
+            updateIngredientsList();
+        };
+    </script>
+</body>
+</html>

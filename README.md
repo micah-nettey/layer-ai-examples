@@ -24,6 +24,13 @@ AI-powered image generation with DALL-E and other models. Shows how Layer AI aut
 **Features:** Automatic type inference, multi-modal support, cost tracking
 **Live Demo:** [Coming soon]
 
+### [Recipe Generator](./recipe-generator)
+Backend API that generates recipes from grocery lists. Express.js example demonstrating vendor-agnostic AI integration, model switching without code changes, and Firebase Functions compatibility. Perfect for understanding Layer AI's value in production backends.
+
+**Stack:** Express.js, TypeScript
+**Features:** Model switching without deployment, cost tracking, Firebase-ready, complete demo script
+**Live Demo:** [Coming soon]
+
 ---
 
 ## Getting Started

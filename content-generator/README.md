@@ -73,22 +73,19 @@ This example demonstrates Layer AI's key features:
 5. **Metadata display** - See which model was actually used for each request
 6. **Usage tracking** - All requests are automatically tracked in your Layer AI dashboard
 
-### Simplified API
+### Type-Safe API
 
-With the latest SDK (v2.1.1+), you no longer need to specify the `type` field in your requests:
+With SDK v2.5.0+, use the type-safe `layer.chat()` method for compile-time validation:
 
 ```typescript
-// Old way (still works, but not recommended)
-const result = await layer.complete({
+// Type-safe method with IDE autocomplete and validation
+const result = await layer.chat({
   gateId: 'your-gate-id',
-  type: 'chat',
-  data: { messages },
-});
-
-// New way (recommended) - type is inferred from gate's taskType
-const result = await layer.complete({
-  gateId: 'your-gate-id',
-  data: { messages },
+  data: {
+    messages: [
+      { role: 'user', content: prompt }
+    ],
+  },
 });
 ```
 
